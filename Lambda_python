@@ -1,0 +1,20 @@
+import boto3
+
+def lambda_handler(event, context):
+    dynamodb = boto3.resource('dynamodb')
+    
+    table = dynamodb.Table('visitors')
+    response = table.update_item(
+        Key = {
+            'count': 'visits'
+        },
+        UpdateExpression = 'SET #c = #c + :val',
+        ReturnValues = 'UPDATED_NEW',
+        ExpressionAttributeNames = {
+            '#c' : 'number'
+        },
+        ExpressionAttributeValues = {
+            ':val' : 1
+        }
+    )
+    return response
