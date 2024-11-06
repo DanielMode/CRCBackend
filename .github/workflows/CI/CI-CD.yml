@@ -1,0 +1,66 @@
+name: CI/CD for Lambda and Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write  # Required for OIDC if using it
+  contents: read
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      # Step 3: Install Python dependencies and run tests
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Python tests
+        run: pytest
+
+      # Step 4: Zip the Lambda function code if tests pass
+      - name: Package Lambda code
+        if: success()  # Only runs if tests passed
+        run: zip -j lambda_function.zip lambda/visitor_count.py
+
+      # Step 5: Configure AWS credentials (use OIDC or secrets)
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: us-east-1
+
+      # Step 6: Upload Lambda zip to S3
+      - name: Upload Lambda code to S3
+        if: success()  # Only runs if tests and packaging were successful
+        run: |
+          aws s3 cp lambda_function.zip s3://lambda-py-artifacts/lambda_function.zip
+
+      # Step 7: Set up Terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      # Step 8: Terraform Init
+      - name: Terraform Init
+        run: terraform init
+
+      # Step 9: Terraform Apply to deploy infrastructure
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
