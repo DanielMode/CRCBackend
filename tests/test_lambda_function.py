@@ -4,11 +4,14 @@ import boto3
 import pytest
 from moto import mock_aws
 from visitor_count import lambda_handler  # Adjust the import based on your structure
+import os
+os.environ['AWS_DEFAULT_REGION'] = 'us-east-1'
+
 
 @mock_aws
 def test_lambda_handler():
     # Set up the mock DynamoDB environment
-    dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
+    dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     table = dynamodb.create_table(
         TableName='VisitorCount',
         KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
