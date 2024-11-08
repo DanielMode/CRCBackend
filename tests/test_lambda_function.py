@@ -3,7 +3,7 @@
 import boto3
 import pytest
 from moto import mock_aws
-from lambda_code.visitor_count import lambda_handler  # Adjust the import based on your structure
+from visitor_count import lambda_handler  # Adjust the import based on your structure
 
 @mock_aws
 def test_lambda_handler():
