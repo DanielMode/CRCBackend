@@ -8,7 +8,7 @@ from visitor_count import lambda_handler  # Adjust the import based on your stru
 @mock_aws
 def test_lambda_handler():
     # Set up the mock DynamoDB environment
-    dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+    dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
     table = dynamodb.create_table(
         TableName='VisitorCount',
         KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
