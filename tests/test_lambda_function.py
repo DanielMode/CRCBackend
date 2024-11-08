@@ -2,10 +2,10 @@
 
 import boto3
 import pytest
-from moto import mock_dynamodb
+from moto import mock_aws
 from lambda_code.visitor_count import lambda_handler  # Adjust the import based on your structure
 
-@mock_dynamodb
+@mock_aws
 def test_lambda_handler():
     # Set up the mock DynamoDB environment
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
