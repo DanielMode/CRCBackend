@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
   region  = "us-east-1"
-  profile = "sso-profile"
+  # profile = "sso-profile"
 }
 
 terraform {
@@ -17,7 +17,7 @@ terraform {
     bucket         = "terra-backende"
     key            = "global/s3/terraform.tfstate"
     region         = "us-east-1"
-    profile        = "sso-profile"
+    # profile        = "sso-profile"
     dynamodb_table = "terraform-locks"
     encrypt        = true
   }
