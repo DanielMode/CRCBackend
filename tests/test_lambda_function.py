@@ -2,7 +2,7 @@
 import boto3
 import pytest
 from moto import mock_dynamodb2
-from lambda.visitor_count import lambda_handler  # adjust import based on your Lambda code structure
+from lambda_code.visitor_count import lambda_handler  # adjust import based on your Lambda code structure
 
 @mock_dynamodb2
 def test_lambda_handler():
