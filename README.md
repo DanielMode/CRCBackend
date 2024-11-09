@@ -1,7 +1,10 @@
 # Infrastructure for HTML Resume Project
 
 ## Project Overview
-This repository contains the lambda & Terraform code for deploying the infrastructure of the HTML resume project, hosted on AWS. The infrastructure includes an API for a visitor counter, storage for the HTML files, and secure DNS configuration.
+This repository contains the lambda function & Terraform code for deploying the infrastructure of the HTML resume project, hosted on AWS. The infrastructure includes an API for a visitor counter, storage for the HTML files, and secure DNS configuration.
+
+## Related Repositories
+- [Frontend Repository](https://github.com/DanielMode/CRCFackend): This repository contains the frontend code for a cloud-hosted HTML resume with a visitor counter.
 
 ## Architecture Overview
 The project infrastructure includes:
