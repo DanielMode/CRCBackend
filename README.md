@@ -27,7 +27,7 @@ The project infrastructure includes:
 - Terraform
 - GitHub account with repository access
 
-**Manual Setup Steps**
+**Manual Setup Steps**:
 Before running Terraform, you’ll need to:
 
 - Create an S3 bucket for the Terraform state file and another for the zipped Lambda function.
