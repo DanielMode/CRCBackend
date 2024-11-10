@@ -19,13 +19,13 @@ The project infrastructure includes:
 ## Prerequisites
 - AWS Account with permissions to provision resources (S3, CloudFront, API Gateway, Lambda, DynamoDB, Route 53, Certificate Manager).
 - Registered Domain Name: Required for setting up DNS and custom domain routing in Route 53.
-- AWS Resources:
+- Terraform
+- GitHub account with repository access
+-  AWS Resources:
    - S3 Buckets:
       - One bucket to store the Terraform state file.
       - A second bucket to store the zipped Lambda code.
    - DynamoDB Table: Used to manage Terraform state lock files, enabling safe and consistent state management during deployments.
-- Terraform
-- GitHub account with repository access
 
 **Manual Setup Steps**
 
@@ -52,7 +52,8 @@ These resources should be configured manually through the AWS console.
 4. **Set Up GitHub Actions**:
    Automated infrastructure deployment is managed with GitHub Actions. When changes are pushed to the main branch:
    - GitHub Actions authenticates with AWS using OIDC.
-   - Terraform commands automatically provision and update resources in AWS.
+   - The Python tests get run. If the tests pass, the code is packaged/zipped and uploaded to an s3 bucket.
+   - Then the terraform references this file in the s3 bucket in deployment of the infrastructure .
    Refer to `.github/workflows/CI-CD.yml` for the full pipeline setup.
 
 ## Usage
