@@ -57,6 +57,7 @@ These resources should be configured manually through the AWS console.
      ```bash
      terraform apply
 3. **Link Frontend**: Once the infrastructure is set up, upload frontend files to the S3 bucket created.
+
 4. **Set Up GitHub Actions**:
    Automated infrastructure deployment is managed with GitHub Actions. When changes are pushed to the main branch:
    - GitHub Actions authenticates with AWS using OIDC.
@@ -75,7 +76,7 @@ Once deployed, visit the URL provided by the CloudFront distribution or Route 53
       - Manual API Redeployment: Redeploy the API Gateway resource manually through the AWS Console. This often resolves the CORS issue by refreshing the deployment.
       - Clear Browser Cache: Sometimes, cached CORS headers can interfere. Clear the cache and reload the page after redeployment.
         
-Following these steps should allow the visitor count to display correctly in the browser.
+   Following these steps should allow the visitor count to display correctly in the browser.
 
 ## Authentication with AWS SSO
 This project uses AWS SSO (Single Sign-On) for secure access to AWS resources, avoiding the use of permanent IAM credentials. AWS SSO provides temporary access permissions, improving security.
