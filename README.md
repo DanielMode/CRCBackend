@@ -18,8 +18,21 @@ The project infrastructure includes:
 
 ## Prerequisites
 - AWS Account with permissions to provision resources (S3, CloudFront, API Gateway, Lambda, DynamoDB, Route 53, Certificate Manager).
+- Registered Domain Name: Required for setting up DNS and custom domain routing in Route 53.
+- AWS Resources:
+   - S3 Buckets:
+      - One bucket to store the Terraform state file.
+      - A second bucket to store the zipped Lambda code.
+   - DynamoDB Table: Used to manage Terraform state lock files, enabling safe and consistent state management during deployments.
 - Terraform
 - GitHub account with repository access
+
+**Manual Setup Steps**
+Before running Terraform, you’ll need to:
+
+- Create an S3 bucket for the Terraform state file and another for the zipped Lambda function.
+- Set up a DynamoDB table for state locking.
+These resources should be configured manually through the AWS console.
 
 ## Installation and Setup
 1. **Clone the Repository**:
@@ -46,6 +59,11 @@ Once deployed, visit the URL provided by the CloudFront distribution or Route 53
 ## Troubleshooting
 - OIDC Authentication Errors: Verify role configuration and permissions in AWS for GitHub Actions.
 - Terraform Apply Issues: Review specific error messages, often caused by resource conflicts or permissions.
+
+## Authentication with AWS SSO
+This project uses AWS SSO (Single Sign-On) for secure access to AWS resources, avoiding the use of permanent IAM credentials. AWS SSO provides temporary access permissions, improving security.
+
+If you are setting up the project independently, you’ll need to configure your own AWS SSO permissions accordingly.
 
 ## OIDC Authentication
 GitHub Actions uses OIDC (OpenID Connect) to securely authenticate with AWS for automated deployments. This approach allows GitHub Actions to assume a role in AWS, eliminating the need for static AWS credentials stored in GitHub secrets.
