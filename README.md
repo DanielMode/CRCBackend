@@ -27,11 +27,11 @@ The project infrastructure includes:
 - Terraform
 - GitHub account with repository access
 
-**Manual Setup Steps**:
-Before running Terraform, you’ll need to:
+**Manual Setup Steps**
+- Before running Terraform, you’ll need to:
 
-- Create an S3 bucket for the Terraform state file and another for the zipped Lambda function.
-- Set up a DynamoDB table for state locking.
+   - Create an S3 bucket for the Terraform state file and another for the zipped Lambda function.
+   - Set up a DynamoDB table for state locking.
 These resources should be configured manually through the AWS console.
 
 ## Installation and Setup
