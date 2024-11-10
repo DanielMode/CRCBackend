@@ -53,4 +53,4 @@ GitHub Actions uses OIDC (OpenID Connect) to securely authenticate with AWS for 
 **Key Points**:
 - **Purpose**: OIDC enables secure, short-lived authentication between GitHub Actions and AWS for infrastructure provisioning.
 - **AWS Role Setup**: An IAM role in AWS is configured to trust GitHub's OIDC provider, with permissions scoped to Terraform actions.
-For detailed OIDC setup instructions, see the .github/workflows/CI-CD.yml file and [GitHub’s guide on OIDC with AWS](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect).
+For detailed OIDC setup instructions, see the `.github/workflows/CI-CD.yml` file and [GitHub’s guide on OIDC with AWS](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect).
