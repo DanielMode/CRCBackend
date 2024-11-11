@@ -11,7 +11,7 @@ resource "aws_dynamodb_table" "visitor_count" {
 
 resource "aws_iam_role" "lambda_exec_role" {
   name = "lambda_exec_role"
-  assume_role_policy = templatefile("${path.module}/lambda_exec_policy.json.tpl", {})
+  assume_role_policy = templatefile("${path.module}/lambda_exec_policy.json.tpl", {})  # The trust policy defines who or what can assume this role 
 }
 
 resource "aws_iam_policy" "lambda_dynamodb_policy" {
@@ -19,7 +19,7 @@ resource "aws_iam_policy" "lambda_dynamodb_policy" {
   description = "Policy for Lambda to access DynamoDB"
   policy = templatefile("${path.module}/lambda_dynamodb_policy.json.tpl", {
     table_arn = aws_dynamodb_table.visitor_count.arn
-  })
+  }) # Policy template with permissions to read/write to the DynamoDB table, dynamically referencing the table ARN
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_exec_policy_attach" {
@@ -54,6 +54,7 @@ resource "aws_lambda_function" "visitor_count_function" {
   }
 }
 
+#API Gateway configurations
 resource "aws_api_gateway_rest_api" "visitor_api" {
   name        = var.api_name
   description = "API to track website visitors"
@@ -110,6 +111,7 @@ resource "aws_api_gateway_integration_response" "visitor_integration_response" {
   }
 }
 
+# CORS configuration
 resource "aws_api_gateway_method" "visitor_method2" {
   rest_api_id   = aws_api_gateway_rest_api.visitor_api.id
   resource_id   = aws_api_gateway_resource.visitor_resource.id
