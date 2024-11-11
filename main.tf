@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
   region  = "us-east-1"
-  # profile = "sso-profile"
+  # profile = "sso-profile"    # Uncomment and set this to use an AWS SSO profile if necessary
 }
 
 terraform {
@@ -17,7 +17,7 @@ terraform {
     bucket         = "terra-backende"
     key            = "global/s3/terraform.tfstate"
     region         = "us-east-1"
-    # profile        = "sso-profile"
+    # profile        = "sso-profile"    # Uncomment for uisng AWS SSO profile for authentication
     dynamodb_table = "terraform-locks"
     encrypt        = true
   }
